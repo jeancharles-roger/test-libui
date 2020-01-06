@@ -1,31 +1,39 @@
 plugins {
-    kotlin("multiplatform") version "1.3.60"
+    kotlin("multiplatform") version "1.3.61"
 }
 
 repositories {
     jcenter()
 }
 
-val os = org.gradle.internal.os.OperatingSystem.current()!!
-
-kotlin {
-    when {
-        os.isWindows -> mingwX86("libui")
-        os.isMacOsX -> macosX64("libui")
-        os.isLinux -> linuxX64("libui")
-        else -> throw Error("Unknown host")
-    }.binaries.executable {
-        if (os.isWindows) {
-            windowsResources("hello.rc")
-            linkerOpts("-mwindows")
+fun target(name: String, resources: String? = null) {
+    val os = org.gradle.internal.os.OperatingSystem.current()!!
+    kotlin {
+        when {
+            os.isWindows -> mingwX86(name)
+            os.isMacOsX -> macosX64(name)
+            os.isLinux -> linuxX64(name)
+            else -> throw Error("Unknown host")
+        }.binaries.executable {
+            if (resources != null && os.isWindows) {
+                windowsResources(resources)
+                linkerOpts("-mwindows")
+            }
         }
-    }
-    val libuiMain by sourceSets.getting {
-        dependencies {
-            implementation("com.github.msink:libui:0.1.6")
+
+        sourceSets {
+            all {
+                dependencies {
+                    implementation("com.github.msink:libui:0.1.6")
+                }
+            }
         }
     }
 }
+
+target("histogram")
+target("control")
+target("draw")
 
 fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileName: String) {
     val taskName = linkTaskName.replaceFirst("link", "windres")
