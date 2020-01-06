@@ -7,14 +7,10 @@ import libui.ktx.draw.*
 import libui.uiDrawDefaultMiterLimit
 import libui.uiDrawLineCapFlat
 import libui.uiDrawLineJoinMiter
-import libui.uiDrawPathNewFigure
-import platform.darwin.Rect
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
-import kotlin.properties.Delegates
 import kotlin.properties.Delegates.observable
-import kotlin.reflect.KClass
 
 fun Size.expanded(deltaX: Double = 0.0, deltaY: Double = 0.0) = Size(width+deltaX, height+deltaY)
 fun Point.moveBy(deltaX: Double = 0.0, deltaY: Double = 0.0) = Point(x+deltaX, y+deltaY)
@@ -109,7 +105,7 @@ class DiagramController<M>(
 
         mouseEvent {
             if (it.Count == 1) {
-                val worldX = this@apply.
+                //val worldX = this@apply.
                 println("One Click ${it.X},${it.Y}")
             }
         }
