@@ -19,8 +19,8 @@ data class Rectangle(val topLeft: Point, val size: Size) {
     val bottomRight = Point(topLeft.x + size.width, topLeft.y + size.height)
 
     fun expanded(deltaX: Double, deltaY: Double = deltaX) = Rectangle(
-            topLeft.moveBy(-deltaX/2, -deltaY/2),
-            size.expanded(deltaX/2, deltaY/2)
+        topLeft.moveBy(-deltaX/2, -deltaY/2),
+        size.expanded(deltaX/2, deltaY/2)
     )
 }
 

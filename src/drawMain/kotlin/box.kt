@@ -3,6 +3,10 @@ import libui.ktx.DrawContext
 import libui.ktx.draw.Point
 import libui.ktx.draw.Size
 import libui.ktx.draw.fill
+import libui.ktx.draw.stroke
+import libui.uiDrawDefaultMiterLimit
+import libui.uiDrawLineCapFlat
+import libui.uiDrawLineJoinMiter
 import kotlin.math.PI
 import kotlin.math.min
 import kotlin.random.Random
@@ -22,7 +26,6 @@ class BoxElement(override val model: Box): DiagramElement<Box> {
             val rectangle = model.rectangle
             val radius = model.radius
             if (model.radius <= 0.0) {
-                figure(rectangle.topLeft)
                 rectangle(rectangle)
             } else {
                 val leftRadius = rectangle.topLeft.x + radius

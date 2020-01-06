@@ -6,9 +6,7 @@ import libui.ktx.*
 const val colorDodgerBlue = 0x1E90FF
 
 fun main(args: Array<String>) = appWindow(
-        title = "Draw test",
-        width = 640,
-        height = 480
+    title = "Draw test", width = 640, height = 480
 ) {
     val init = 10
     val boxes = randomBoxes(init)
